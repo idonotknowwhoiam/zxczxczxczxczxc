@@ -14,7 +14,7 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: Начало
-            - uses: yanzay/notify-telegram@v0.1.0
+              uses: yanzay/notify-telegram@v0.1.0
               if: always()
               with:                         
                   chat: ${{ secrets.TELEGRAM_TO }} # user id or channel name secret
@@ -22,6 +22,6 @@ jobs:
                   status: ${{ job.status }} # do not modify this line
             - uses: actions/setup-node@v2
             - name: Установка зависимостей
-            - run: npm ci
+              run: npm ci
             - name: Запуск тестов
-            - run: npx eslint src
+              run: npx eslint src
