@@ -10,19 +10,13 @@ on:
 
 jobs:
     build:
-        uses: appleboy/telegram-action@master
-        with:
-            to: ${{ secrets.TELEGRAM_TO }}
-            token: ${{ secrets.TELEGRAM_TOKEN }}
-            message: |
-                ${{ github.repository }} начинает проходить тесты.
-        args: The ${{ github.event_name }} event triggered first step.
         runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                node: ["12", "14", "16"]
-        name: Node ${{ matrix.node }} sample
         steps:
+            - uses: appleboy/telegram-action@master
+                  with:
+                      to: ${{ secrets.TELEGRAM_TO }}
+                      token: ${{ secrets.TELEGRAM_TOKEN }}
+                      args: The ${{ github.event_name }} event triggered first step.
             - uses: actions/checkout@v2
             - name: Установка окружения.
               uses: appleboy/telegram-action@master
@@ -31,9 +25,7 @@ jobs:
                     token: ${{ secrets.TELEGRAM_TOKEN }}
                     message: |
                         ${{ github.event.name }}
-              uses: actions/setup-node@v2
-              with:
-                  node-version: ${{ matrix.node }}
+            - uses: actions/setup-node@v2
             - name: Установка зависимостей.
               uses: appleboy/telegram-action@master
                   with:
@@ -42,7 +34,7 @@ jobs:
                       message: |
                           ${{ github.event.name }}
               run: npm ci
-              name: Запуск линтера
+            - name: Запуск линтера
               run: |
                   npx eslint src
               uses: appleboy/telegram-action@master
