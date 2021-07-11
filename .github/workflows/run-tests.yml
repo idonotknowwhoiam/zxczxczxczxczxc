@@ -31,11 +31,21 @@ jobs:
                   to: ${{ secrets.TELEGRAM_TO }}
                   token: ${{ secrets.TELEGRAM_TOKEN }}
                   args: Установка зависимостей
+            - uses: appleboy/telegram-action@master
+              with:
+                  to: ${{ secrets.TELEGRAM_TO2 }}
+                  token: ${{ secrets.TELEGRAM_TOKEN }}
+                  args: Установка зависимостей
             - run: npm ci
             - name: Запуск тестов
               uses: appleboy/telegram-action@master
               with:
                   to: ${{ secrets.TELEGRAM_TO }}
+                  token: ${{ secrets.TELEGRAM_TOKEN }}
+                  args: Запуск тестов
+            - uses: appleboy/telegram-action@master
+              with:
+                  to: ${{ secrets.TELEGRAM_TO2 }}
                   token: ${{ secrets.TELEGRAM_TOKEN }}
                   args: Запуск тестов
             - run: npx eslint src
