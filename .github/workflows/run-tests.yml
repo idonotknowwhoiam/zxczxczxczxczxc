@@ -17,29 +17,4 @@ jobs:
                       to: ${{ secrets.TELEGRAM_TO }}
                       token: ${{ secrets.TELEGRAM_TOKEN }}
                       args: The ${{ github.event_name }} event triggered first step.
-            - uses: actions/checkout@v2
-            - name: Установка окружения.
-              uses: appleboy/telegram-action@master
-                with:
-                    to: ${{ secrets.TELEGRAM_TO }}
-                    token: ${{ secrets.TELEGRAM_TOKEN }}
-                    message: |
-                        ${{ github.event.name }}
-            - uses: actions/setup-node@v2
-            - name: Установка зависимостей.
-              uses: appleboy/telegram-action@master
-                  with:
-                      to: ${{ secrets.TELEGRAM_TO }}
-                      token: ${{ secrets.TELEGRAM_TOKEN }}
-                      message: |
-                          ${{ github.event.name }}
-              run: npm ci
-            - name: Запуск линтера
-              run: |
-                  npx eslint src
-              uses: appleboy/telegram-action@master
-                  with:
-                      to: ${{ secrets.TELEGRAM_TO }}
-                      token: ${{ secrets.TELEGRAM_TOKEN }}
-                      message: |
-                          ${{ github.event.name }}
+            
