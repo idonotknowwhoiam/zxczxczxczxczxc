@@ -14,7 +14,7 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: Начало
-              uses: appleboy/telegram-action@master
+            - uses: appleboy/telegram-action@master
               with:
                   to: ${{ secrets.TELEGRAM_TO }}
                   token: ${{ secrets.TELEGRAM_TOKEN }}
@@ -26,7 +26,7 @@ jobs:
                   args: ${{ github.workflow }}
             - uses: actions/setup-node@v2
             - name: Установка зависимостей
-              uses: appleboy/telegram-action@master
+            - uses: appleboy/telegram-action@master
               with:
                   to: ${{ secrets.TELEGRAM_TO }}
                   token: ${{ secrets.TELEGRAM_TOKEN }}
@@ -38,7 +38,7 @@ jobs:
                   args: Установка зависимостей
             - run: npm ci
             - name: Запуск тестов
-              uses: appleboy/telegram-action@master
+            - uses: appleboy/telegram-action@master
               with:
                   to: ${{ secrets.TELEGRAM_TO }}
                   token: ${{ secrets.TELEGRAM_TOKEN }}
