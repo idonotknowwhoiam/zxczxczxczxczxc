@@ -14,41 +14,14 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: Начало
-              uses: appleboy/telegram-action@master
-              with:
-                  to: ${{ secrets.TELEGRAM_TO }}
-                  token: ${{ secrets.TELEGRAM_TOKEN }}
-                  args: ${{ github.workflow }}
-            - name: Начало
-              uses: appleboy/telegram-action@master
-              with:
-                  to: ${{ secrets.TELEGRAM_TO2 }}
-                  token: ${{ secrets.TELEGRAM_TOKEN }}
-                  args: ${{ github.workflow }}
+            - uses: yanzay/notify-telegram@v0.1.0
+              if: always()
+              with:                         
+                  chat: ${{ secrets.TELEGRAM_TO }} # user id or channel name secret
+                  token: ${{ secrets.TELEGRAM_TOKEN }} # token secret
+                  status: ${{ job.status }} # do not modify this line
             - uses: actions/setup-node@v2
             - name: Установка зависимостей
-              uses: appleboy/telegram-action@master
-              with:
-                  to: ${{ secrets.TELEGRAM_TO }}
-                  token: ${{ secrets.TELEGRAM_TOKEN }}
-                  args: Установка зависимостей
-            - name: Установка зависимостей
-              uses: appleboy/telegram-action@master
-              with:
-                  to: ${{ secrets.TELEGRAM_TO2 }}
-                  token: ${{ secrets.TELEGRAM_TOKEN }}
-                  args: Установка зависимостей
             - run: npm ci
             - name: Запуск тестов
-              uses: appleboy/telegram-action@master
-              with:
-                  to: ${{ secrets.TELEGRAM_TO }}
-                  token: ${{ secrets.TELEGRAM_TOKEN }}
-                  args: Запуск тестов
-            - name: Запуск тестов
-              uses: appleboy/telegram-action@master
-              with:
-                  to: ${{ secrets.TELEGRAM_TO2 }}
-                  token: ${{ secrets.TELEGRAM_TOKEN }}
-                  args: Запуск тестов
             - run: npx eslint src
